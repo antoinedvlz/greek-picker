@@ -91,7 +91,7 @@ Le script est court et lisible. Modifications fréquentes :
 
 ### Licence
 
-Aucune licence n'est attachée à ce projet. Le code est consultable mais pas réutilisable sans autorisation. Voir [choosealicense.com/no-permission](https://choosealicense.com/no-permission/) pour les détails.
+Sous licence MIT — voir le fichier [LICENSE](LICENSE).
 
 ---
 
@@ -176,7 +176,7 @@ The script is short and readable. Common tweaks:
 
 ### License
 
-No license is attached to this project. The code is viewable but not reusable without permission. See [choosealicense.com/no-permission](https://choosealicense.com/no-permission/) for details.
+MIT licensed — see the [LICENSE](LICENSE) file.
 
 ---
 
