@@ -1,14 +1,7 @@
-#!/usr/bin/env python3
-"""
-Greek Letter Picker — petite fenêtre flottante macOS
-Clic sur une lettre = copie dans le presse-papier
-Échap ou clic dehors = ferme la fenêtre
-"""
 import tkinter as tk
 import subprocess
 import sys
 
-# (Majuscule, minuscule, nom latin)
 LETTERS = [
     ('Α', 'α', 'alpha'),   ('Β', 'β', 'beta'),    ('Γ', 'γ', 'gamma'),
     ('Δ', 'δ', 'delta'),   ('Ε', 'ε', 'epsilon'), ('Ζ', 'ζ', 'zeta'),
@@ -30,20 +23,16 @@ class GreekPicker:
         self.root.title("Greek")
         self.root.configure(bg='#1e1e1e')
 
-        # Toujours au-dessus
         self.root.attributes('-topmost', True)
 
-        # Positionne en haut à droite de l'écran
         screen_w = self.root.winfo_screenwidth()
         win_w, win_h = 360, 280
         x = screen_w - win_w - 30
         y = 80
         self.root.geometry(f"{win_w}x{win_h}+{x}+{y}")
 
-        # Ferme avec Échap
         self.root.bind('<Escape>', lambda e: self.root.destroy())
 
-        # Status bar pour feedback "copié"
         self.status_var = tk.StringVar(value="Cliquer une lettre pour la copier")
         status = tk.Label(
             self.root, textvariable=self.status_var,
@@ -51,7 +40,6 @@ class GreekPicker:
         )
         status.pack(fill='x')
 
-        # Grille 6 colonnes × 4 lignes
         grid_frame = tk.Frame(self.root, bg='#1e1e1e')
         grid_frame.pack(padx=8, pady=4, fill='both', expand=True)
 
@@ -65,7 +53,6 @@ class GreekPicker:
         for r in range(4):
             grid_frame.rowconfigure(r, weight=1)
 
-        # Focus pour que Échap fonctionne tout de suite
         self.root.focus_force()
 
     def _make_button(self, parent, upper, lower, name):
@@ -84,7 +71,7 @@ class GreekPicker:
         def on_click(event=None):
             copy_to_clipboard(lower)
             self.status_var.set(f"« {lower} » copié — ⌘V pour coller")
-            # Petit flash visuel
+
             frame.configure(bg='#3a5a3a')
             label_letters.configure(bg='#3a5a3a')
             label_name.configure(bg='#3a5a3a')
@@ -101,7 +88,7 @@ class GreekPicker:
 
         for w in (frame, label_letters, label_name):
             w.bind('<Button-1>', on_click)
-            w.bind('<Button-2>', on_right_click)  # clic droit / ctrl-clic
+            w.bind('<Button-2>', on_right_click)
             w.bind('<Button-3>', on_right_click)
             w.bind('<Enter>', lambda e, f=frame, l1=label_letters, l2=label_name: self._hover(f, l1, l2, True))
             w.bind('<Leave>', lambda e, f=frame, l1=label_letters, l2=label_name: self._hover(f, l1, l2, False))
